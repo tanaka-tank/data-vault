@@ -1,0 +1,61 @@
+<div class="nav_wrapper">
+    <div class="nav_content">
+      <header class="sp_header">
+        <div class="midashi">
+          <a class="navigation-item" href="{% url 'acoin_index' %}">アマゾンコイン集計データ</a>
+          </div>
+      </header>
+    </div>
+</div>
+
+
+<nav class="navbar navbar-expand navbar-dark bg-dark" aria-label="Second navbar example">
+  <div class="container-fluid">
+    <!--a class="navbar-brand" href="#">Always expand</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarsExample02" aria-controls="navbarsExample02" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button-->
+
+    <div class="collapse navbar-collapse" id="navbarsExample02">
+      <ul class="navbar-nav me-auto">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            年次別
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            {% for year in yearly_list %}
+            <li><a class="dropdown-item" href="{% url 'acoin_index' %}?year={{year}}">{{ year }}年</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle active" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            チャート図
+          </a>
+          <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+            {% for year in yearly_list %}
+            <li><a class="dropdown-item" href="{% url 'acoin_chart1' %}?year={{year}}">{{ year }}年</a></li>
+            {% endfor %}
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" href="https://www.amazon.co.jp/Amazon-500-Amazon%E3%82%B3%E3%82%A4%E3%83%B3/dp/B00KQVX53C" target="_blank">コインはコチラ</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>
+<div class="nav_ad">
+  <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+  <!-- fast -->
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-3321194381719400"
+       data-ad-slot="9792460235"
+       data-ad-format="auto"
+       data-full-width-responsive="true"></ins>
+  <script>
+  (adsbygoogle = window.adsbygoogle || []).push({});
+  </script>
+</div>

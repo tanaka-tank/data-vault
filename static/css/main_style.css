@@ -1,0 +1,291 @@
+html {
+    color: #FFFFFF;
+    background: #3E454C;
+}
+label {
+  cursor: pointer;
+}
+footer {
+    display: block;
+    float: none;
+    text-align: center;
+    background: #3E454C;
+    color: #fffFFF66;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 12px;
+    font-family: meiryo, arial, sans-serif;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    /* height: 100px; */
+}
+.cd-main__btn_org {
+display: block;
+padding: 0.75em 0;
+padding: var(--space-sm) 0;
+background-color: hsl(203, 79%, 44%);
+background-color: var(--cd-color-2);
+border-radius: .25em;
+box-shadow: 0 1px 1px rgba(0, 0, 0, .2), 0 1px 8px rgba(0, 0, 0, .1), inset 0 1px 0 rgba(255,255,255,0.2);
+box-shadow: var(--shadow-sm),inset 0 1px 0 rgba(255,255,255,0.2);
+text-align: center;
+color: hsl(0, 0%, 100%);
+color: var(--cd-color-3);
+font-weight: bold;
+}
+.cd-main__btn {
+cursor:pointer;
+padding: 10px 20px;
+display:inline-block;
+background-color: hsl(203, 79%, 44%);
+background-color: var(--cd-color-2);
+color: hsl(0, 0%, 100%);
+color: var(--cd-color-3);
+border-radius: 5px;
+text-decoration:none;
+padding: 0 30px;
+line-height: 38px;
+}
+.card{
+  margin: 20px;
+  font-size: 16px;
+  min-height: 100vh;
+}
+.card-container {
+	  padding: 20px 20px;
+    background: #fff;
+    color: #666;
+    box-shadow: 0 5px 15px rgba(0,0,0,.08);
+}
+.card-default {
+	display: flex;
+  flex-wrap: wrap;
+	justify-content: stretch;
+}
+.card-inline-block {
+          /* インラインブロック要素にする display: inline-block;*/
+       /* 背景色指定 background-color:  #ccc; */
+    padding: 20px 20px;            /* 余白指定 */
+    flex: 1 0;
+                 /* 高さ指定 height: 100px; */
+}
+.cd-textarea {
+    max-width: 100%;
+    width: 100%;
+    border: 0 none;
+    padding: 0 10px;
+    background: #fff;
+    color: #666;
+    border: 1px solid #e5e5e5;
+    transition: .2s ease-in-out;
+    transition-property: color,background-color,border;
+}
+.cd-textarea-current {
+  border: 0 none;
+  
+  background: #fff;
+  color: #666;
+  border: 1px solid #e5e5e5;
+  transition: .2s ease-in-out;
+  transition-property: color,background-color,border;
+}
+.cd-margin-top {
+	margin-top: 20px!important;
+}
+.radio-form-label {
+  margin: 1px 20px 1px 20px;
+}
+.radio-label{
+  font-size:14px;
+}
+.radio-label > label{
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media only screen and (max-device-width: 480px) {
+ .radio-label{
+   font-size:14px;
+   flex-direction: column;
+   display: inline-flex;
+ }
+}
+.head {
+  display: flex;
+  background: hsl(210, 10%, 27%);
+}
+.child {
+  padding:8px;
+  margin: 5px;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.child a{
+  color: inherit;
+  text-decoration: none;
+}
+.child a:link{
+  color : #ffffff;
+}
+.child a:hover{
+  color : #ff7043;
+}
+.f-right {
+  margin-right: auto;    /* これ！！！ */
+}
+
+body {
+ margin:0;
+ padding:0;
+ border:0;
+ width:100%;
+ background:#F0F0F0;
+ min-width:600px;    /* 最小幅 */
+}
+.colmask {
+ position:relative;
+ clear:both;
+ float:left;
+ width:100%; /* ページ全体幅 */
+ overflow:hidden;
+}
+.leftmenu {
+  background:#2C3035;
+  /* background:#fccbff;左カラム背景色 */
+}
+.leftmenu .colright {
+ float:left;
+ width:200%;
+ position:relative;
+ left:12em;
+/* background:#cbe6ff;右カラム背景色 */
+}
+.leftmenu .colmigiwrap {
+ float:right;
+ width:50%;
+ position:relative;
+ right:12em;
+ /*padding-bottom:1em;*/
+}
+.leftmenu .colmigi {
+ margin:0 0 0 12em;
+ position:relative;
+ right:100%;
+ overflow:hidden;
+}
+.colmigi {
+  background: #f0f0f0;
+}
+.leftmenu .colhidari {
+ float:left;
+ width:11em;
+ position:relative;
+ right:11em;
+}
+.btn-push {
+  display: inline-block;
+  max-width: 180px;
+  text-align: left;
+  background-color: #ffa300;
+  font-size: 16px;
+  color: #FFF;
+  text-decoration: none;
+  font-weight: bold;
+  padding: 10px 24px;
+  border-radius: 4px;
+  border-bottom: 4px solid #d37800;
+}
+.btn-push:active {
+    transform: translateY(4px);
+    border-bottom: none;
+}
+
+
+/* ラジオボタンは非表示にする 
+input[type=radio] {
+  display: none; 
+}*/
+/* チェックされた時のスタイル */
+input[type="radio"]:checked + .label_left {
+  width: 25px;
+  height:25px;
+  background: #b8d9ff;
+  color: #FFF;
+  background-image: url("/static/img/align_left_a.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+input[type="radio"]:checked + .label_center {
+  width: 25px;
+  height:25px;
+  background: #b8d9ff;
+  color: #FFF; 
+  background-image: url("/static/img/align_center_a.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+input[type="radio"]:checked + .label_right {
+  width: 25px;
+  height:25px;
+  background: #b8d9ff;
+  color: #FFF; 
+  background-image: url("/static/img/align_right_a.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+/* マウスオーバーしたときのスタイル */
+.label_left:hover{
+  background-color: #E2EDF9; 
+}
+.label_center:hover{
+  background-color: #E2EDF9; 
+}
+.label_right:hover{
+  background-color: #E2EDF9; 
+}
+/* lableのスタイル */
+.label_left {
+  color: #000;
+  /*border: #dddddd solid 2px;
+  display: block;*/
+  width: 25px;
+  height:25px;
+  position: relative;
+  margin:10px;
+  display: inline-block;
+  background-image: url("/static/img/align_left.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+.label_center {
+  color: #000;
+  /*border: #dddddd solid 2px;
+  display: block;*/
+  width: 25px;
+  height:25px;
+  position: relative;
+  margin:10px;
+  display: inline-block;
+  background-image: url("/static/img/align_center.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+.label_right {
+  color: #000;
+  /*border: #dddddd solid 2px;
+  display: block;*/
+  width: 25px;
+  height:25px;
+  position: relative;
+  margin:10px;
+  display: inline-block;
+  background-image: url("/static/img/align_right.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+.inline-card-block {
+  display: inline-block;      /* インラインブロック要素にする */
+  padding:  20px;             /* 余白指定 */
+}

@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}jungle{% endblock %}</title>
+    <link rel="shortcut icon" href="{% block favicon %}{% endblock %}">
+    <script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}?v={% now 'Ymd' %}"></script>
+    <script type="text/javascript" src="{% static 'js/measures.js' %}?v={% now 'Ymd' %}"></script>
+    <script type="text/javascript" src="{% static 'js/detect.js' %}?v={% now 'Ymd' %}"></script>
+    {% block inccss %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+    {% block incjs %}{% endblock %}
+</body>
+</html>

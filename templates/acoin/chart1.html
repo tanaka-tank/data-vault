@@ -1,0 +1,89 @@
+{% extends 'common/base_kai.html' %}
+{% load static %}
+{% block favicon %}{% static 'img/jungle_favicon.ico' %}?v={% now "Ymd" %}{% endblock %}
+{% block title %}acoin chart1{% endblock %}
+{% block nav %}{% include 'acoin/nav.html' %}{% endblock %}
+{% block content %}
+<div style="height: 100vh;">
+    <canvas id="myChart"></canvas>
+</div>
+{% endblock %}
+
+{% block incjs %}
+<!--script type="text/javascript" src="{% static 'js/detect.js' %}"></!--script-->
+<script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
+<script>
+    window.addEventListener('load', function () {
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: {{ hiduke| safe}},
+        datasets: [{
+            label: '¥500',
+            type: "line",
+            fill: false,
+            data: {{ 500yen | safe }},
+        borderColor: "rgba(255, 99, 132, 1)",
+        yAxisID: "y-axis-1",
+                }, {
+            label: '¥1000',
+            type: "line",
+            fill: false,
+            data: {{ 1000yen | safe }},
+        borderColor: "rgba(153, 102, 255, 1)",
+        yAxisID: "y-axis-1",
+                }, {
+            label: '¥2500',
+            type: "line",
+            fill: false,
+            data: {{ 2500yen | safe }},
+        borderColor: "rgba(54, 162, 235, 1)",
+        yAxisID: "y-axis-1",
+                }, {
+            label: '¥5000',
+            type: "line",
+            fill: false,
+            data: {{ 5000yen | safe }},
+        borderColor: "rgba(255, 206, 86, 1)",
+        yAxisID: "y-axis-1",
+                }, {
+            label: '¥10000',
+            type: "line",
+            fill: false,
+            data: {{ 10000yen | safe }},
+        borderColor: "rgba(75, 192, 192, 1)",
+        yAxisID: "y-axis-1",
+                }, {
+            label: '¥50000',
+            type: "line",
+            fill: false,
+            data: {{ 50000yen | safe }},
+        borderColor: "rgba(255, 159, 64, 1)",
+        yAxisID: "y-axis-1",
+                }
+    ]
+            },
+        options: {
+        tooltips: {
+            mode: 'nearest',
+            intersect: false,
+        },
+        responsive: true,
+        scales: {
+            yAxes: [{
+                id: "y-axis-1",
+                type: "linear",
+                position: "left",
+                ticks: {
+                    max: 45000,
+                    min: 0,
+                    stepSize: 5000
+                },
+            }],
+        },
+    }
+        });
+    });
+</script>
+{% endblock %}

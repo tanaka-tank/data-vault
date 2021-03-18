@@ -1,0 +1,57 @@
+{% extends 'common/base_kai.html' %}
+{% load static %}
+{% block favicon %}{% static 'img/conv_favicon.ico' %}?v={% now "Ymd" %}{% endblock %}
+{% block title %}Line→Comma Converter{% endblock %}
+{% block nav %}{% include 'conv/nav.html' %}{% endblock %}
+{% block content %}
+<form name="input_form" id="input_form" method="post" action="{% url 'lcconvert' %}">{% csrf_token %}
+    {% csrf_token %}
+    <div class="card">
+        <div class="card-container">
+            <div class="card-default">
+                <div class="card-inline-block">
+                    Before conversion character.(Max 20000)<br />
+                    <textarea rows="10" name="convert_before_name" id="convert_before_name"
+                        class="cd-textarea" onkeyup="viewStrLen();">{% if before_text %}{{before_text}}{% endif %}</textarea>
+                    Word count <span id="str_len">0</span>
+                        {% for field, errors in form.errors.items %}
+                            {% for error in errors %}
+                            <p class="alert-error">{{ error }}</p>
+                            {% endfor %}
+                        {% endfor %}
+                </div>
+                <div class="card-inline-block">
+                    Translated character.<br />
+                    <textarea rows="10" name="convert_after_name" class="cd-textarea"
+                        onClick="this.select();">{% if after_text %}{{after_text}}{% endif %}</textarea>
+                </div>
+            </div>
+            <div>
+                <span class="radio-form-label">Add Option</span>
+                <span class="radio-label">
+                    <label><input name="add_type" type="radio" value="single_quote"
+                            {% if single_quote %}checked{% endif %}>
+                        single</label>
+                    <label><input name="add_type" type="radio" value="double_quote"
+                            {% if double_quote %}checked{% endif %}>
+                        double</label>
+                    <label><input name="add_type" type="radio" value="no_quote" {% if no_quote %}checked{% endif %}>
+                        nothing</label>
+                </span>
+            </div>
+        </div>
+        <ul class="cd-margin-top">
+            <a href="javascript:input_form.submit()" class="btn-push">convert</a>
+        </ul>
+    </div>
+</form>
+{% endblock %}
+{% block incjs %}
+<script>
+function viewStrLen(){
+    var len = document.getElementById("convert_before_name").value.length;
+    document.getElementById("str_len").innerText = len;//+ "文字"
+}
+viewStrLen();
+</script>
+{% endblock %}

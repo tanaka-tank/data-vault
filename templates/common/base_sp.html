@@ -1,0 +1,34 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script>document.getElementsByTagName("html")[0].className += " js";</script>
+    <title>{% block title %}jungle{% endblock %}</title>
+    <link rel="shortcut icon" href="{% block favicon %}{% endblock %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/table_style.min.css' %}?v={% now 'u' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main_style_sp.min.css' %}?v={% now 'u' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap@5.0.0/bootstrap.min.css' %}">
+    <style type="text/css">
+    </style>
+    {% block inccss %}{% endblock %}
+</head>
+
+<body>
+    {% block nav %}{% endblock %}
+    {% block content %}{% endblock %}
+    <div class="footer">
+        <footer><small>&copy; 2019-<span id="thisYear"></span> forest gnome inc.</small></footer>
+        <script>
+            date = new Date();
+            thisYear = date.getFullYear();
+            document.getElementById("thisYear").innerHTML = thisYear;
+        </script>
+        <script type="text/javascript" src="{% static 'js/bootstrap@5.0.0/bootstrap.min.js' %}"></script>
+        <script type="text/javascript" src="{% static 'js/measures.js' %}"></script>
+        {% block incjs %}{% endblock %}
+    </div>
+</body>
+</html>

@@ -1,0 +1,139 @@
+{% extends 'common/base_kair.html' %}
+{% load static %}
+{% block title %}{% if title_name %}{{ title_name }}{% endif %}{% endblock %}
+{% block favicon %}{% static 'img/boat_favicon.png' %}?v={% now "Ymd" %}{% endblock %}
+{% block nav %}{% include 'odds_avg/nav.html' %}{% endblock %}
+{% block content %}
+<div class="info-area">
+    本日は{% now "F" %}{% now "j" %}日({% now "l" %})<br/>
+    {% if race_no %}<div>{{ race_no }} R</div> {% endif %}
+    {% if race_deadline_time %}<div>締切時刻 {{ race_deadline_time }}</div>{% endif %}
+    {% if result %}{{ result }}{% endif %}
+    {% for field, errors in form.errors.items %}
+        {% for error in errors %}
+        <p class="alert-error">{{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+</div>
+<form name="input_form" id="input_form" method="post" action="">
+    {% csrf_token %}
+    <input type="hidden" name="race_no" value="{{race_no}}"/>
+    <input type="hidden" name="race_deadline_time" value="{{race_deadline_time}}"/>
+    <input type="hidden" name="submit_token" value="{% if submit_token %}{{ submit_token }}{% endif %}" />
+    <input type="hidden" name="order_zyun" id="order_zyun" value="{% if order_zyun %}{{ order_zyun }}{% else %}asc{% endif %}"/>
+    <input type="hidden" name="order_type" id="order_type" value="{% if order_type %}{{ order_type }}{% else %}sort_odds{% endif %}"/>
+        <ul class="cd-margin-top">
+            <div class="cd-margin-top-left">投資額
+                <input type="number" name="toushigaku" id="toushigaku" value="{% if toushigaku %}{{ toushigaku }}{% else %}1000{% endif %}" step="100" min="0" max="999999999" style="ime-mode: disabled;">
+                <a href="javascript:post_data();" class="btn btn-push">計算</a>
+            </div>
+            <div class="cd-margin-top-right">
+                <a href="javascript:update_data();" class="btn btn-update">オッズのみ再取得</a>
+            </div>
+        </ul>
+        <!--div>
+            <input id="sort_odds" type="radio" name="sort" value="1" checked><label>オッズソート</label>
+            <input id="sort_funaban" type="radio" name="sort" value="2"><label>船番ソート</label>
+        </div-->
+        <!--iframe src="http://livebb.jlc.ne.jp/bb_top/new_bb/streamer/streamer.php?md=T&jo=21&ymd=2021-02-09&race=11
+        " frameborder="0" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true"></iframe-->
+        <div class="tab-wrap">
+            <input id="tab01" type="radio" name="tab" class="tab-switch" value="3tan"><label class="tab-label" for="tab01">3連単</label>
+            <input id="tab02" type="radio" name="tab" class="tab-switch" value="3puku"><label class="tab-label" for="tab02">3連複</label>
+            <input id="tab03" type="radio" name="tab" class="tab-switch" value="2tan"><label class="tab-label" for="tab03">2連単</label>
+            <input id="tab04" type="radio" name="tab" class="tab-switch" value="2puku"><label class="tab-label" for="tab04">2連複</label>
+        </div>
+    <div class="card">
+        <div class="card-container">
+            {% if not error %}
+            最終取得時間 {% if get_last_time %}{{ get_last_time }}{% endif %}
+            <div class="card-default" id="odds_list">
+                <table class="fl-table">
+                    <thead class="">
+                        <tr>
+                            <th>対象</th>
+                            <th class="sort" data-id='sort_funaban' data-sort="sort_funaban">船番</th>
+                            <th class="sort" data-id='sort_odds' data-sort="sort_odds">オッズ</th>
+                            <th>購入額</th>
+                            <th>的中金額</th>
+                            <th>利益</th>
+                            <!--th>実オッズ</th-->
+                        </tr>
+                    </thead>
+                    <tbody class="list">
+                        {% for row in odds_list %}
+                        <tr>
+                            <td><input type="checkbox" name="odds_check" id="odds_check[{{row.0}}]" value="odds_check[{{row.0}}]" {% if row.3 %}checked{% endif %}>
+                                <input type="hidden" name="odds_no[{{row.0}}]" value="{{row.0}}">
+                            </td>
+                            <td class="sort_funaban">
+                                {% for i in row.1|make_list %}
+                                <span class="ico_num num{{ i }}">{{ i }}</span>
+                                {% endfor %}
+                                <input type="hidden" name="odds_race_order[{{row.1}}]" value="{{row.1}}">
+                            </td>
+                            <td class="sort_odds">
+                                <span style="display:none;">{{ row.2 }}</span>
+                                <input type="text" name="odds[{{row.0}}]" value="{{ row.2 }}" style="ime-mode: disabled; width:45px;"maxlength="5"></td>
+                            <td>{% if row.3 and row.3 != 'checked' %}{{ row.3 }}{% endif %}</td>
+                            <td>{% if row.4 %}{{ row.4 }}{% endif %}</td>
+                            <td>{% if row.5 %}{{ row.5 }}{% endif %}</td>
+                            <!--td></td-->
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</form>
+{% endblock %}
+{% block inccss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/boatrace.min.css' %}?v={% now 'u' %}">
+<style>
+    .sort.desc:after {
+      content:"▼";
+    }
+
+    .sort.asc:after {
+      content:"▲";
+    }
+
+</style>
+{% endblock %}
+{% block incjs %}
+<script type="text/javascript" src="{% static 'js/jquery-3.5.1.min.js' %}?v={% now 'Ymd' %}"></script>
+<script type="text/javascript" src="{% static 'js/boatrace.min.js' %}?v={% now 'u' %}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/list.js/1.5.0/list.min.js"></script>
+<script>
+//var obj = document.querySelector("#odds_list > table > thead > tr > th:nth-child(3)")
+//obj.classList.add("asc");
+
+var options = {
+  valueNames: ['sort_funaban' ,'sort_odds']
+};
+var oddsList = new List('odds_list', options);
+
+order_type = document.getElementById('order_type').value
+sort = document.getElementById('order_zyun').value
+
+oddsList.sort( order_type, { order : sort });
+
+//初期三角
+//var elements = document.getElementsByClassName('sort')[1];
+//elements.classList.add("asc")
+
+$('.sort').on('click', function(){
+    // ここに処理を記述
+    //console.log($(this).attr('class'));
+    var order_type = $(this).data('id');
+    var sort = $(this).attr('class').replace("sort ", "");
+    document.getElementById('order_zyun').value = sort;
+    document.getElementById('order_type').value = order_type;
+    console.log(order_type);
+    console.log(sort);
+});
+</script>
+{% endblock %}

@@ -1,0 +1,58 @@
+tbody{
+    color: hsl(210, 10%, 27%);
+}
+/*
+.table-wrapper {
+    margin: 10px 70px 70px;
+    box-shadow: 0 35px 50px rgba(0, 0, 0, .2);
+}*/
+.fl-table {
+    font-weight: 400;
+    border: 0;
+    border-collapse: collapse;
+    width: 100%;
+    max-width: 100%;
+    white-space: nowrap;
+    background-color: #fff;
+}
+.fl-table td,
+.fl-table th {
+    text-align: center;
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+.fl-table th {
+    font-size: 9pt;
+}
+
+.fl-table td {
+    font-size: 10pt;
+    border-right: 1px solid #f8f8f8;
+}
+.fl-table thead th {
+    color: #fff;
+    background: #324960;
+}
+.fl-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+/*スクロール用*/
+  .table-wrapper {
+    width: 100%;
+    height: calc(100% - 5px);
+    overflow-y:scroll;
+  }
+  table {
+    table-layout: fixed;
+    width: 100%;
+  }
+  
+  thead tr th {
+    position: sticky;
+    top: 0;
+  }
+  
+  tbody tr th {
+    position: sticky;
+    left: 0;
+  }

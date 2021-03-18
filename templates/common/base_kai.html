@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}jungle{% endblock %}</title>
+    <link rel="shortcut icon" href="{% block favicon %}{% endblock %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/table.min.css' %}?v={% now 'Ymd' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base_kai.min.css' %}?v={% now 'Ymd' %}">
+</head>
+
+
+<body>
+    <div class="wrapper">
+        <header>{% block nav %}{% endblock %}</header>
+        <div class="container">
+            <div class="side">
+                <div class="ad_area">
+                    ٩(*´꒳`*)۶°˖✧
+
+                    ٩(ˊᗜˋ*)و
+                </div>
+            </div>
+            <div class="main">
+                <div class="contains">
+                    {% block content %}{% endblock %}
+                    <div>
+                        <div class="footer">
+                            <small>&copy; 2019-<span id="thisYear"></span> forest gnome inc.</small>
+                            <script>
+                                date = new Date();
+                                thisYear = date.getFullYear();
+                                document.getElementById("thisYear").innerHTML = thisYear;
+                            </script>
+                            {% block incjs %}{% endblock %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,51 @@
+{% extends 'common/base_kair.html' %}
+{% block title %}絵文字ジェネレーター{% endblock %}
+{% block nav %}{% include 'fontimage/nav.html' %}{% endblock %}
+{% load static %}
+{% block favicon %}{% static 'img/jfavicon.png' %}?v=20191217{% endblock %}
+{% block container %}container{% endblock %}
+{% block inccss %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/emoji.min.css' %}">
+{% endblock %}
+{% block content %}
+<form id="build_form" method="post" action="{% url 'fontimage_create' %}">{% csrf_token %}
+    <div class="card">
+        <div class="card-container">
+            <div class="card-default">
+                <div class="inline-card-block">
+                    build string<br />
+                    <textarea rows="5" name="build_string"
+                        class="cd-textarea-current">{% if build_string %}{{build_string}}{% endif %}</textarea>
+                    <div>
+                        <span class="align left">
+                            <input type="radio" name="generator_align" id="generator__align--left" value="left"
+                                {% if generator_align and generator_align == "left" %}checked{% endif %}>
+                            <label class="label_left" for="generator__align--left"></label>
+                        </span>
+                        <span class="align center">
+                            <input type="radio" name="generator_align" id="generator__align--center" value="center"
+                                {% if generator_align and generator_align == "center" %}checked{% endif %}>
+                            <label class="label_center" for="generator__align--center"></label>
+                        </span>
+                        <span class="align right">
+                            <input type="radio" name="generator_align" id="generator__align--right" value="right"
+                                {% if generator_align and generator_align == "right" %}checked{% endif %}>
+                            <label class="label_right" for="generator__align--right"></label>
+                        </span>
+                    </div>
+                    <!--button type="submit" class="cd-main__btn">create</button-->
+                    <a href="javascript:build_form.submit()" class="btn-push">build</a>
+                </div>
+                <div class="inline-card-block">
+                    Build Image<br />
+                    <img src="data:image/png;base64,{% if data_uri %}{{data_uri}}{% endif %}"
+                        alt="{% if img_alt %}{{img_alt}}{% endif %}"
+                        style="border : solid 1px #BFBFBF;width: 128px; height: 128px;">
+                </div>
+            </div>
+        </div>
+        <div class="card-default">
+        </div>
+    </div>
+</form>
+{% endblock %}

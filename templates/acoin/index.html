@@ -1,0 +1,37 @@
+{% extends 'common/base_kai.html' %}
+{% load static %}
+{% block favicon %}{% static 'img/jungle_favicon.ico' %}?v={% now "Ymd" %}{% endblock %}
+{% block title %}acoin list{% endblock %}
+{% block nav %}{% include 'acoin/nav.html' %}{% endblock %}
+{% block content %}
+{% if error %}{{ error }}{% endif %}
+{% if not error %}
+<main class="table-wrapper">
+    <!-- カラム 2 ここから -->
+    <table class="fl-table">
+        <thead class="">
+            <tr>
+                <th>日付</th>
+                <th>500円</th>
+                <th>1000円</th>
+                <th>2500円</th>
+                <th>5000円</th>
+                <th>10000円</th>
+                <th>50000円</th>
+            </tr>
+        </thead>
+        <tbody class="">
+            {% for row in rows %}
+            <tr>
+                {% for line in row %}
+                <td>{{ line }}</td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    </div>
+    <!-- カラム 2 ここまで -->
+</main>
+{% endif %}
+{% endblock %}

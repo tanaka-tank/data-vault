@@ -1,0 +1,107 @@
+label {
+  cursor: pointer;
+}
+.radio-form-label {
+  margin: 1px 20px 1px 20px;
+}
+.radio-label{
+  font-size:14px;
+}
+.radio-label > label{
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+@media only screen and (max-device-width: 480px) {
+ .radio-label{
+   font-size:14px;
+   flex-direction: column;
+   display: inline-flex;
+ }
+}
+/* ラジオボタンは非表示にする */
+input[type=radio] {
+  display: none; 
+}
+/* チェックされた時のスタイル */
+input[type="radio"]:checked + .label_left {
+  width: 25px;
+  height:25px;
+  background: #b8d9ff;
+  color: #FFF;
+  background-image: url("/static/img/align_left_a.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+input[type="radio"]:checked + .label_center {
+  width: 25px;
+  height:25px;
+  background: #b8d9ff;
+  color: #FFF; 
+  background-image: url("/static/img/align_center_a.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+input[type="radio"]:checked + .label_right {
+  width: 25px;
+  height:25px;
+  background: #b8d9ff;
+  color: #FFF; 
+  background-image: url("/static/img/align_right_a.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+/* マウスオーバーしたときのスタイル */
+.label_left:hover{
+  background-color: #E2EDF9; 
+}
+.label_center:hover{
+  background-color: #E2EDF9; 
+}
+.label_right:hover{
+  background-color: #E2EDF9; 
+}
+/* lableのスタイル */
+.label_left {
+  color: #000;
+  /*border: #dddddd solid 2px;
+  display: block;*/
+  width: 25px;
+  height:25px;
+  position: relative;
+  margin:10px;
+  display: inline-block;
+  background-image: url("/static/img/align_left.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+.label_center {
+  color: #000;
+  /*border: #dddddd solid 2px;
+  display: block;*/
+  width: 25px;
+  height:25px;
+  position: relative;
+  margin:10px;
+  display: inline-block;
+  background-image: url("/static/img/align_center.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+.label_right {
+  color: #000;
+  /*border: #dddddd solid 2px;
+  display: block;*/
+  width: 25px;
+  height:25px;
+  position: relative;
+  margin:10px;
+  display: inline-block;
+  background-image: url("/static/img/align_right.png");
+  background-repeat: no-repeat;
+  background-size:contain;
+}
+.inline-card-block {
+  display: inline-block;      /* インラインブロック要素にする */
+  padding:  20px;             /* 余白指定 */
+}

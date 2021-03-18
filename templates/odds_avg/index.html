@@ -1,0 +1,57 @@
+{% extends 'common/base_kair.html' %}
+{% load static %}
+{% block title %}平均オッズ計算{% endblock %}
+{% block favicon %}{% static 'img/boat_favicon.png' %}?v=20210110{% endblock %}
+{% block nav %}{% include 'odds_avg/nav.html' %}{% endblock %}
+{% block content %}
+<!--form id="input_form" method="post" action="/conv/lcconvert/"-->
+    {% csrf_token %}
+    <div class="card">
+        <div class="info-area">
+        本日は{% now "F" %}{% now "j" %}日({% now "l" %})
+        </div>
+        <div class="card-container">
+            開催中のレース<br/>
+            {% for row in race_list %}
+                {% if row.place_name and row.title_name %}
+                    {{row.place_name}} | 開催時間 {{row.start_time}}~{{row.end_time}} | {{row.title_name}}<br/>
+                {% endif %}
+            {% endfor %}
+            <a href="https://www.boatrace.jp/owpc/pc/race/index?hd={% now 'Ymd' %}" alt="BOAT RACE オフィシャルウェブサイト" target="_blank">BOAT RACE オフィシャルウェブサイト</a>
+            <div class="card-default">
+                <div class="card-inline-block">
+                    <a href="{% url 'odds_avg_xrentan' place_name='ashiya' %}?bet_type=3tan">芦屋競艇 3連単オッズ計算</a><br />
+                    <a href="{% url 'odds_avg_xrentan' place_name='ashiya' %}?bet_type=2tan">芦屋競艇 2連単オッズ計算</a><br />
+                    <a href="https://www.boatrace-ashiya.com/" alt="ボートレース芦屋 オフィシャルウェブサイト" target="_blank">芦屋競艇HP</a>
+                </div>
+                <div class="card-inline-block">
+                    <a href="{% url 'odds_avg_xrentan' place_name='omura' %}?bet_type=3tan">大村競艇 3連単オッズ計算</a><br />
+                    <a href="{% url 'odds_avg_xrentan' place_name='omura' %}?bet_type=2tan">大村競艇 2連単オッズ計算</a><br />
+                    <a href="https://omurakyotei.jp/" alt="ボートレース大村 オフィシャルウェブサイト" target="_blank">大村競艇HP</a>
+                </div>
+                <div class="card-inline-block">
+                    <a href="{% url 'odds_avg_xrentan' place_name='tokuyama' %}?bet_type=3tan">徳山競艇 3連単オッズ計算</a><br />
+                    <a href="{% url 'odds_avg_xrentan' place_name='tokuyama' %}?bet_type=2tan">徳山競艇 2連単オッズ計算</a><br />
+                    <a href="https://www.boatrace-tokuyama.jp/" alt="ボートレース徳山 オフィシャルウェブサイト" target="_blank">徳山競艇HP</a>
+                </div>
+            </div>
+            <!--div>
+                <span class="radio-form-label">Add Option</span>
+                <span class="radio-label">
+                    <label><input name="add_type" type="radio" value="single_quote"
+                            {% if single_quote %}checked{% endif %}>
+                        single</label>
+                    <label><input name="add_type" type="radio" value="double_quote"
+                            {% if double_quote %}checked{% endif %}>
+                        double</label>
+                    <label><input name="add_type" type="radio" value="no_quote" {% if no_quote %}checked{% endif %}>
+                        nothing</label>
+                </span>
+            </div-->
+        </div>
+        <!--ul class="cd-margin-top">
+            <button type="submit" class="cd-main__btn">convert</button>
+        </ul-->
+    </div>
+<!--/form-->
+{% endblock %}
