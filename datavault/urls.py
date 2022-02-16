@@ -15,27 +15,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+#Include関数をインポート
+from django.urls import include
 from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls import url
 
-from acoin.views import AcoinIndexView
-from odds_avg.views import BoatIndexView
-from odds_avg.views import XrentanView
-from conv.views import ConvIndexView
-from index.views import IndexView
-
 urlpatterns = [
     #path('admin/', admin.site.urls),
-    path('', IndexView.index, name='_index'),
-    path('403/', IndexView.index403, name='_index403'),
-    path('acoin/', AcoinIndexView.index, name='acoin_index'),
-    path('indexsp/', AcoinIndexView.indexsp, name='acoin_indexsp'),
-    path('acoin/chart1/', AcoinIndexView.chart1, name='acoin_chart1'),
-    path('odds_avg/', BoatIndexView.as_view(), name='oddsavg_index'),
-    url(r'^odds_avg/(?P<place_name>\w+)/$', XrentanView.as_view(), name='odds_avg_xrentan'),
-    path('conv/', ConvIndexView.conv_lcconvert, name='convert_index'),
-    path('conv/lcconvert/', ConvIndexView.conv_lcconvert, name='lcconvert'),
-    path('conv/clconvert/', ConvIndexView.conv_clconvert, name='clconvert'),
+    path('', include('index.urls')),
+    path('acoin/', include('acoin.urls')),
+    path('odds_avg/', include('odds_avg.urls')),
+    path('conv/', include('conv.urls')),
+    path('fontimage/', include('fontimage.urls')),
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

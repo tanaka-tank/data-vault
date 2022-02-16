@@ -47,6 +47,7 @@
 </form>
 {% endblock %}
 {% block incjs %}
+<script type="text/javascript" src="{% static 'js/detect.js' %}?v={% now 'Ymd' %}"></script>
 <script>
 function viewStrLen(){
     var len = document.getElementById("convert_before_name").value.length;

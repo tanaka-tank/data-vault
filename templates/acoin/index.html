@@ -2,6 +2,10 @@
 {% load static %}
 {% block favicon %}{% static 'img/jungle_favicon.ico' %}?v={% now "Ymd" %}{% endblock %}
 {% block title %}acoin list{% endblock %}
+{% block incjs %}
+<script type="text/javascript" src="{% static 'js/measures.js' %}?v={% now 'Ymd' %}"></script>
+<script type="text/javascript" src="{% static 'js/detect.js' %}?v={% now 'Ymd' %}"></script>
+{% endblock %}
 {% block nav %}{% include 'acoin/nav.html' %}{% endblock %}
 {% block content %}
 {% if error %}{{ error }}{% endif %}

@@ -27,7 +27,7 @@ import dask.dataframe as dd
 import socket
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
-from logging import getLogger
+from logging import basicConfig, getLogger, DEBUG
 
 from ..utils import common
 from ..utils import boatrace
@@ -40,7 +40,7 @@ class BoatRaceBatchLogic:
     global const_path
     const_path = importlib.import_module(common.CommonUtils().get_const_path())
     ## logger
-    logger = getLogger("file")
+    logger = getLogger(__name__)
 
     def __init__(self, value=''):
         self.value = value
@@ -69,7 +69,7 @@ class BoatRaceBatchLogic:
         except pd.errors.EmptyDataError as e:
             #import traceback
             #traceback.print_exc()
-            self.logger.error("EmptyDataError: {} is empty ".format(e))
+            print("EmptyDataError: {} is empty ".format(e))
             with open(bk_csv_path, 'w',encoding="utf_8") as f:
                 writer = csv.writer(f)
                 for data_row in csv_data_list:

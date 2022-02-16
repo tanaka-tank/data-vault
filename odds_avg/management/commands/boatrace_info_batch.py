@@ -7,11 +7,11 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 import argparse
 import socket
 import time
-from logging import basicConfig, getLogger, ERROR
+from logging import basicConfig, getLogger, DEBUG
 from datetime import datetime
 from ...logic import boatracebatch
 from ...logic import scrapingbatch
-
+from django.conf import settings
 class Command(BaseCommand):
 
     # ネットワーク設定の初期化
@@ -22,7 +22,7 @@ class Command(BaseCommand):
     # [python manage.py help sampleBatch]で表示されるメッセージ
     help = 'これはテスト用のコマンドバッチです'
     # これはメインのファイルにのみ書く
-    basicConfig(level=ERROR)
+    basicConfig(level=DEBUG)
 
     def add_arguments(self, parser):
         # コマンドライン引数を指定
@@ -30,10 +30,8 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         start = time.time()
-        #logger = getLogger(__name__)
-        logger = getLogger("file")
+        logger = getLogger(__name__)
         socket.getaddrinfo = Command.getAddrInfoWrapper
-
         try:
             logger.debug('バッチが動きました： {}'.format(options['day_value']))
             bbu = boatracebatch.BoatRaceBatchLogic()
@@ -46,12 +44,12 @@ class Command(BaseCommand):
             bbu.create_race_info_places_bk()
             sbl.create_race_deadline_time(day)
         except Exception as e:
-            #import traceback
-            #traceback.print_exc()
-            logger.error(e)
+            import traceback
+            traceback.print_exc()
+            logger.debug(e)
         finally:
             elapsed_time = time.time() - start
-            logger.info("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+            logger.debug ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
 
 
 def valid_day_type(d):

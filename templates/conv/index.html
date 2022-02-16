@@ -10,8 +10,14 @@
             <div class="card-default">
                 <div class="card-inline-block">
                     Before conversion character.(Max 20000)<br />
-                    <textarea rows="10" name="convert_before_name"
-                        class="cd-textarea">{% if before_text %}{{before_text}}{% endif %}</textarea>
+                    <textarea rows="10" name="convert_before_name" id="convert_before_name"
+                        class="cd-textarea" onkeyup="viewStrLen();">{% if before_text %}{{before_text}}{% endif %}</textarea>
+                    Word count <span id="str_len">0</span>
+                    {% for field, errors in form.errors.items %}
+                        {% for error in errors %}
+                        <p class="alert-error">{{ error }}</p>
+                        {% endfor %}
+                    {% endfor %}
                 </div>
                 <div class="card-inline-block">
                     Translated character<br />
@@ -38,4 +44,14 @@
         </ul>
     </div>
 </form>
+{% endblock %}
+{% block incjs %}
+<script type="text/javascript" src="{% static 'js/detect.js' %}?v={% now 'Ymd' %}"></script>
+<script>
+function viewStrLen(){
+    var len = document.getElementById("convert_before_name").value.length;
+    document.getElementById("str_len").innerText = len;//+ "文字"
+}
+viewStrLen();
+</script>
 {% endblock %}

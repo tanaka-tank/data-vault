@@ -80,7 +80,7 @@ class BoatRaceUtils:
             return {'result':message,'error':e}
         finally:
             elapsed_time = time.time() - start
-            print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+            #print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
         return params
 
     def get_post_data_params(req,place,bet_type,upd_flag=''):
@@ -131,7 +131,7 @@ class BoatRaceUtils:
             return result.update({'result':message,'error':e})
         finally:
             elapsed_time = time.time() - start
-            print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+            #print ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
         return result
 
     def get_place_name(place):
