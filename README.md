@@ -1,28 +1,16 @@
-# datavault
-
-There are various unhappy things in this world.
-
-But trying to create good things from that misery,
-
-The things that can be produced are wise people.
-
 ## Description
 
 
-Well, I will stand up too.
+It collects data on coins and odds and provides it as a list.
 
-But well, let's sit a little more.
+Some provide the ability to edit the data.
 
 ## Features
 
 
-It is zero if you pull one from one.
+It is made of Django, and not only provides screens, but also executes batches.
 
-If you lose love from your life, what will remain.
-
-If you take moisture from the land
-
-It is like becoming a desert.
+However, it is a weak content, so it is like sand in the desert.
 
 
 ## Usage
