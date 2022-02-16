@@ -60,15 +60,15 @@ class Command(BaseCommand):
 #    except ValueError:
 #        raise argparse.ArgumentTypeError('Not a valid type: {}.'.format(t))
 
-def cmd(headers):   
+def cmd(headers):
     ymd = dt.today().strftime("%Y%m%d")
     price_total = ymd + ",";
 
     yyyy = dt.today().strftime("%Y")
-    
+
     file_name = acl.get_amazon_coin_data_yyyy_csv_full_path(yyyy)
     #file_name = "/home/firenium/firenium.com/public_html/data/datavault/acoin/storage/data/amazon_coin_data_"+ yyyy +".csv";
-    
+
     #500
     url = "https://www.amazon.co.jp/Amazon-500-Amazon%E3%82%B3%E3%82%A4%E3%83%B3/dp/B00KQVX53C"
     price = get_get_price(url, headers)
@@ -109,12 +109,12 @@ def cmd(headers):
     add_all_list_first_row(price_total)
 
 def get_get_price(url,headers):
-	#htmlの取得
+    #htmlの取得
     response = requests.get(url=url, headers=headers)#, cookies=cookie)
     html = response.content
-    #BeautifulSoupで扱えるようにパース
+    #BeautifulSoupで扱えるようにパースします
     soup = BeautifulSoup(html, "html.parser")
-    ele_txt = soup.find(id="priceblock_ourprice").get_text()
+    ele_txt = soup.find(id="selectedProductPrice").get_text()
     # re.sub(正規表現パターン, 置換後文字列, 置換したい文字列)
     # \D : 10進数でない任意の文字。（全角数字等を含む）
     num = re.sub("\\D", "", ele_txt)
@@ -144,7 +144,7 @@ def add_all_list_first_row(price_total):
     if not os.path.isfile(list_file_path):
         with open(list_file_path, "w") as f:
             logger.info("amazon_coin_data.csv[新規作成]")
-    
+
     with open(list_file_path) as f:
         l = f.readlines()
 
@@ -158,8 +158,8 @@ def add_all_list_first_row(price_total):
 #UAランダム
 def get_random_ua():
     ua_array = [
-        'Mozilla/5.0 (X11; Linux x86_64; rv:61.0) Gecko/20100101 Firefox/61.0',
-        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.192 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36 Edg/91.0.864.70',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:65.0) Gecko/20100101 Firefox/65.0',
     ];
     return random.choice(ua_array)

@@ -7,7 +7,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 import argparse
 import socket
 import time
-from logging import basicConfig, getLogger, ERROR
+from logging import basicConfig, getLogger, DEBUG
 from datetime import datetime
 from ...utils import boatrace
 from ...logic import boatracebatch
@@ -24,7 +24,7 @@ class Command(BaseCommand):
     # [python manage.py help sampleBatch]で表示されるメッセージ
     help = 'これはテスト用のコマンドバッチです'
     # これはメインのファイルにのみ書く
-    basicConfig(level=ERROR)
+    basicConfig(level=DEBUG)
 
     def add_arguments(self, parser):
         # コマンドライン引数を指定
@@ -36,8 +36,7 @@ class Command(BaseCommand):
         start = time.time()
 
         socket.getaddrinfo = Command.getAddrInfoWrapper
-        #logger = getLogger(__name__)
-        logger = getLogger("file")
+        logger = getLogger(__name__)
         
         res_comment = {}
         try:
@@ -51,12 +50,12 @@ class Command(BaseCommand):
             bbu = boatracebatch.BoatRaceBatchLogic()
             res_comment = bbu.create_odds_file_places(place,bet_type,race_no)
         except Exception as e:
-            #import traceback
-            #traceback.print_exc()
+            import traceback
+            traceback.print_exc()
             logger.error(e)
         finally:
             elapsed_time = time.time() - start
-            logger.debug("elapsed_time:{0}".format(elapsed_time) + "[sec]")
+            logger.debug ("elapsed_time:{0}".format(elapsed_time) + "[sec]")
             logger.debug(res_comment)
             #import json
             #logger.debug(json.dumps(res_comment))

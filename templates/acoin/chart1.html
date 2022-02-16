@@ -10,6 +10,8 @@
 {% endblock %}
 
 {% block incjs %}
+<script type="text/javascript" src="{% static 'js/measures.js' %}?v={% now 'Ymd' %}"></script>
+<script type="text/javascript" src="{% static 'js/detect.js' %}?v={% now 'Ymd' %}"></script>
 <!--script type="text/javascript" src="{% static 'js/detect.js' %}"></!--script-->
 <script type="text/javascript" src="{% static 'js/Chart.min.js' %}"></script>
 <script>

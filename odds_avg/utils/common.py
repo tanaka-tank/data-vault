@@ -196,7 +196,6 @@ class CommonUtils:
             order_type_keyfunc = CommonUtils.__keyfunc_col2
         if sort_param['order_type'] == 'sort_funaban':
             order_type_keyfunc = CommonUtils.__keyfunc_col1
-        #print(sort_param)
         return sorted(__xrentna_list, reverse=reverse_flag, key=order_type_keyfunc)#key=lambda x: x[2])
     
     def __keyfunc_col2(x):
@@ -220,9 +219,9 @@ class CommonUtils:
         Returns:
             float:ソート用に変換したfloat値
         """
-        if CommonUtils.is_float(x[1]) and x[1] != '0.0':
-            return float(x[1])
-        elif CommonUtils.is_float(x[1]) and x[1] == '0.0':
+        if type(x[1]) == int and x[1] != 0.0:
+            return x[1]
+        elif type(x[1]) == int and x[1] == 0.0:
             return float('inf')
         else:
             return float('inf')
@@ -286,7 +285,6 @@ class CommonUtils:
         seen = []
         unique_list = [x for x in l_2d if x not in seen and not seen.append(x)]
         return len(l_2d) != len(unique_list)
-    
     def is_float(str):
         """https://stackoverflow.com/questions/736043/checking-if-a-string-can-be-converted-to-float-in-python
         Args:

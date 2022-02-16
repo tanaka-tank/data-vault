@@ -17,7 +17,7 @@ import lxml.html
 
 from concurrent.futures import ThreadPoolExecutor
 from functools import partial
-from logging import getLogger
+from logging import basicConfig, getLogger, DEBUG
 
 from ..utils import common
 from ..utils import boatrace
@@ -31,7 +31,7 @@ class ScrapingBatchLogic:
     global const_path
     const_path = importlib.import_module(common.CommonUtils().get_const_path())
     ## logger
-    logger = getLogger("file")
+    logger = getLogger(__name__)
     ## ボートバッチロジック生成
     brbl = None
 
@@ -381,7 +381,7 @@ class ScrapingBatchLogic:
             self.__writerow_csv(csv_path,all_data_list)
 
         except AttributeError as e:
-            #traceback.print_exc()
+            traceback.print_exc()
             self.logger.error(e)
             return {'result':'システムエラー['+sys._getframe().f_code.co_name+']','error':e}
         return {'result':'正常終了','error':''}
@@ -452,7 +452,7 @@ class ScrapingBatchLogic:
                 self.__writerow_csv(csv_path,all_data_list)
 
         except AttributeError as e:
-            #traceback.print_exc()
+            traceback.print_exc()
             self.logger.error(e)
             return {'result':'システムエラー['+sys._getframe().f_code.co_name+']','error':e}
         return {'result':'正常終了','error':''}
@@ -495,7 +495,7 @@ class ScrapingBatchLogic:
             self.__writerow_csv(csv_path,all_data_list)
 
         except AttributeError as e:
-            #traceback.print_exc()
+            traceback.print_exc()
             self.logger.error(e)
             return {'result':'システムエラー['+sys._getframe().f_code.co_name+']','error':e}
         return {'result':'正常終了','error':''}
@@ -537,7 +537,7 @@ class ScrapingBatchLogic:
             self.__writerow_csv(csv_path,all_data_list)
 
         except AttributeError as e:
-            #traceback.print_exc()
+            traceback.print_exc()
             self.logger.error(e)
             return {'result':'システムエラー['+sys._getframe().f_code.co_name+']','error':e}
         return {'result':'正常終了','error':''}
@@ -608,7 +608,7 @@ class ScrapingBatchLogic:
                 self.__writerow_csv(csv_path,all_data_list)
 
         except AttributeError as e:
-            #traceback.print_exc()
+            traceback.print_exc()
             self.logger.error(e)
             return {'result':'システムエラー['+sys._getframe().f_code.co_name+']','error':e}
         return {'result':'正常終了','error':''}

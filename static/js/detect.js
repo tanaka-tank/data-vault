@@ -7,6 +7,7 @@
 	};
 
 	const threshold = 160;
+	const threshold_height = 210;
 
 	const emitEvent = (isOpen, orientation) => {
 		window.dispatchEvent(new CustomEvent('devtoolschange', {
@@ -19,7 +20,7 @@
 
 	setInterval(() => {
 		const widthThreshold = window.outerWidth - window.innerWidth > threshold;
-		const heightThreshold = window.outerHeight - window.innerHeight > threshold;
+		const heightThreshold = window.outerHeight - window.innerHeight > threshold_height;
 		const orientation = widthThreshold ? 'vertical' : 'horizontal';
 
 		if (

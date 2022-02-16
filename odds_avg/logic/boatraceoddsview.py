@@ -102,9 +102,13 @@ class BoatRaceOddsViewLogic:
 
             params['get_last_time'] = boatrace.BoatRaceUtils.get_odds_file_update_time(csv_path)
 
-            csv_file = open(csv_path, 'r', encoding='utf_8', errors='', newline='')
-            f = csv.reader(csv_file, delimiter=',', doublequote=True, lineterminator="\r\n", quotechar='"', skipinitialspace=True)
-            params['odds_list'] = f
+            odds_list = self.__get_new_race_odds_data_dict(place,bet_type,race_no)
+            params['odds_list'] = odds_list
+            
+            #csv_file = open(csv_path, 'r', encoding='utf_8', errors='', newline='')
+            #f = csv.reader(csv_file, delimiter=',', doublequote=True, lineterminator="\r\n", quotechar='"', skipinitialspace=True)
+            #params['odds_list'] = f
+
             #csv_data = dd.read_csv(csv_path, header=None, encoding='utf_8',dtype = 'str').compute()
             #params['odds_list'] = csv_data.values.tolist()
             
@@ -135,14 +139,10 @@ class BoatRaceOddsViewLogic:
             params = {'result':'レース時間超過','error':'time_over'}
             
             params['get_last_time'] = boatrace.BoatRaceUtils.get_odds_file_update_time(csv_path)
-            
-            odds_list = self.__get_new_race_odds_data_dict(place,bet_type,race_no)
-            params['odds_list'] = odds_list
-            
-            #csv_file = open(csv_path, 'r', encoding='utf_8', errors='', newline='')
-            #f = csv.reader(csv_file, delimiter=',', doublequote=True, lineterminator="\r\n", quotechar='"', skipinitialspace=True)
-            #params['odds_list'] = f
 
+            csv_file = open(csv_path, 'r', encoding='utf_8', errors='', newline='')
+            f = csv.reader(csv_file, delimiter=',', doublequote=True, lineterminator="\r\n", quotechar='"', skipinitialspace=True)
+            params['odds_list'] = f
             #csv_data = dd.read_csv(csv_path, header=None, encoding='utf_8',dtype = 'str').compute()
             #params['odds_list'] = csv_data.values.tolist()
             

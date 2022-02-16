@@ -2,6 +2,9 @@
 {% load static %}
 {% block title %}平均オッズ計算{% endblock %}
 {% block favicon %}{% static 'img/boat_favicon.png' %}?v=20210110{% endblock %}
+{% block incjs %}
+<script type="text/javascript" src="{% static 'js/detect.js' %}?v={% now 'Ymd' %}"></script>
+{% endblock %}
 {% block nav %}{% include 'odds_avg/nav.html' %}{% endblock %}
 {% block content %}
 <!--form id="input_form" method="post" action="/conv/lcconvert/"-->
